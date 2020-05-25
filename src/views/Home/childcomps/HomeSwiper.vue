@@ -1,8 +1,10 @@
 <!-- HomeSwiper -->
 <template>
   <van-swipe :autoplay="3000">
-    <van-swipe-item v-for="(item, index) in banners" :key="item.id">
-      <img v-lazy="item.src" style="width: 100%; height: 200px; " />
+    <van-swipe-item v-for="(item) in banners" :key="item.id">
+      <a :href="item.link">
+        <img v-lazy="item.image" style="width: 100%; height: 200px; " />
+      </a>
     </van-swipe-item>
   </van-swipe>
 </template>

@@ -28,6 +28,7 @@ export default {
     right: 0;
     display: flex;
     height: 49px;
+    background: #fff;
     box-shadow: 0 -1px 5px rgba(100, 100, 100, .2);
   }
 </style>
