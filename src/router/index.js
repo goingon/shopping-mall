@@ -13,7 +13,7 @@ const Profile = () =>
 Vue.use(VueRouter)
 
 const routes = [
-  { path: '/', redirect: '/home' },
+  { path: '', redirect: '/home' },
   { path: '/home', component: Home },
   { path: '/category', component: Categories },
   { path: '/car', component: Car },
@@ -21,7 +21,9 @@ const routes = [
 ]
 
 const router = new VueRouter({
-  routes
+  routes,
+  mode: 'history'
+
 })
 
 export default router
