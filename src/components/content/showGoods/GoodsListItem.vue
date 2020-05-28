@@ -2,7 +2,7 @@
 <template>
   <div class="goods-list-item">
     <a :href="goodsItem.link">
-      <img :src="goodsItem.show.img" alt="">
+      <img :src="goodsItem.show.img" alt="" @load="imgLoaded">
       <p class="goods-list-item-title"> {{ goodsItem.title }} </p>
       <div class="num">
         <span class="price">{{ goodsItem.price }} </span>
@@ -23,9 +23,9 @@
         }
       }
     },
-    data() {
-      return {
-        
+    methods: {
+      imgLoaded() {
+        this.$bus.$emit('itemImgLoaded')
       }
     }
   }
@@ -42,10 +42,10 @@
     font-size: 12px;
   }
   .goods-list-item:nth-child(odd){
-    padding-right:5px;
+    padding-right:2.5px;
   }
   .goods-list-item:nth-child(even){
-    padding-left:5px;
+    padding-left:2.5px;
   }
   .goods-list-item-title {
     overflow: hidden;

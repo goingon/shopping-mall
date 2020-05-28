@@ -38,10 +38,10 @@
 /* @import url(); 引入css类 */
   .tab-control {
     display: flex;
-    position: sticky;
+    /* position: sticky;
     top: 44px;
     left: 0;
-    right: 0;
+    right: 0; */
     text-align: center;
     color: #000;
     height: 40px;

@@ -42,7 +42,7 @@
     flex-direction: row;
     flex-wrap: wrap;
     text-align: center;
-    padding: 0 10px;
+    padding: 0 5px;
   }
 
 </style>

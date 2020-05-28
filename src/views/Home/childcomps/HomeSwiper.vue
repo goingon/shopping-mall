@@ -3,7 +3,7 @@
   <van-swipe :autoplay="3000">
     <van-swipe-item v-for="(item) in banners" :key="item.id">
       <a :href="item.link">
-        <img v-lazy="item.image" style="width: 100%; height: 200px; " />
+        <img v-lazy="item.image" style="width: 100%; height: 200px; " @load="imageLoaded" />
       </a>
     </van-swipe-item>
   </van-swipe>
@@ -22,9 +22,22 @@
         }
       }
     },
+    data() {
+      return {
+        isLoad: false
+      }
+    },
     components: {
       [Swipe.name]: Swipe,
       [SwipeItem.name]: SwipeItem
+    },
+    methods: {
+      imageLoaded() {
+        if(!this.isLoad){
+          this.$emit('swiperImagesLoaded')
+          this.isLoad = true
+        }
+      }
     }
   }
 </script>
