@@ -9,6 +9,8 @@ const Car = () =>
   import ('views/Car/Car')
 const Profile = () =>
   import ('views/Profile/Profile')
+const Detail = () =>
+  import ('views/Detail/Detail')
 
 Vue.use(VueRouter)
 
@@ -17,7 +19,8 @@ const routes = [
   { path: '/home', component: Home },
   { path: '/category', component: Categories },
   { path: '/car', component: Car },
-  { path: '/profile', component: Profile }
+  { path: '/profile', component: Profile },
+  { path: '/detail/:iid', component: Detail }
 ]
 
 const router = new VueRouter({

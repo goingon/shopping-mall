@@ -19,7 +19,7 @@
       <week-fashion/>
       <tab-control :titles="['流行','新款','精选']" @tabClick="tabClick" ref="tabcontrolinner"/>
       <goods-list :goods="getCurrentGoodsData"/>
-    <ul>
+    <!-- <ul>
       <li>aaa1</li>
       <li>aaa2</li>
       <li>aaa3</li>
@@ -120,7 +120,7 @@
       <li>aaa98</li>
       <li>aaa99</li>
       <li>aaa100</li>
-    </ul>
+    </ul> -->
     </scroll>
     <back-top @click.native="backTop" ref="backtop" v-show="isBackTopshow"/>
   </div>
@@ -168,7 +168,8 @@
         ],
         isBackTopshow: false,
         tabOffsetTop: 0,
-        isTabControlShow: false
+        isTabControlShow: false,
+        scrollY: 0
       }
     },
     components: {
@@ -192,7 +193,7 @@
       */
       //点击栏目，切换数据
       tabClick(index) {
-        console.log(index)
+        // console.log(index)
         switch(index){
           case 0:
             this.currentTab = 'pop'
@@ -232,7 +233,6 @@
         // 获取tab-control的位置
         // 所有的组件都有一个$el的属性，获取组件内部元素
         this.tabOffsetTop = this.$refs.tabcontrolinner.$el.offsetTop;
-        console.log(this.tabOffsetTop)
       },
 
       /** 
@@ -271,6 +271,12 @@
       this.$bus.$on('itemImgLoaded',() => {
         refresh()
       })
+    },
+    activated() {
+      this.$refs.scroll.scrollTo(0,this.scrollY,0)
+    },
+    deactivated() {
+      this.scrollY = this.$refs.scroll.getScrollY()
     }
   }
 </script>

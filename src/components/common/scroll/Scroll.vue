@@ -32,13 +32,18 @@
       },
 
       finishPullUp() {
-        console.log('调用后，可以监听pullingUp事件，不调用不能监听pullingUp不能刷新数据')
+        // console.log('调用后，可以监听pullingUp事件，不调用不能监听pullingUp不能刷新数据')
         this.scroll && this.scroll.finishPullUp()
       },
 
       refresh() {
-        console.log('调用后刷新，重新计算content高度，防止拉不到最后')
+        // console.log('调用后刷新，重新计算content高度，防止拉不到最后')
         this.scroll && this.scroll.refresh()
+      },
+
+      // 获取当前位置的y坐标
+      getScrollY() {
+        return this.scroll && this.scroll.y
       }
     },
     //生命周期 - 挂载完成（访问DOM元素）
