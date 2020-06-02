@@ -11,6 +11,8 @@ const Profile = () =>
   import ('views/Profile/Profile')
 const Detail = () =>
   import ('views/Detail/Detail')
+const NotFoundComponent = () =>
+  import ('views/404/NotFoundComponent')
 
 Vue.use(VueRouter)
 
@@ -20,13 +22,13 @@ const routes = [
   { path: '/category', component: Categories },
   { path: '/car', component: Car },
   { path: '/profile', component: Profile },
-  { path: '/detail/:iid', component: Detail }
+  { path: '/detail/:iid', component: Detail },
+  { path: '*', component: NotFoundComponent }
 ]
 
 const router = new VueRouter({
   routes,
   mode: 'history'
-
 })
 
 export default router

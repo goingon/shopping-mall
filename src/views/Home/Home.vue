@@ -138,10 +138,12 @@
   import WeekFashion from './childcomps/WeekFashion'
 
   import { getHomeMultidata, getHomeGoodsLists } from 'network/home'
-  import { debounce } from 'commonjs/util.js'
+  import { debounce } from 'commonjs/util'
+  import { itemListenerMixin } from 'commonjs/mixin'
 
   export default {
     name: 'Home',
+    mixins: [itemListenerMixin],
     data() {
       return {
         banners: [],
@@ -266,17 +268,24 @@
       this.getHomeGoodsLists('pop');
       this.getHomeGoodsLists('new');
       this.getHomeGoodsLists('sell');
-      const refresh = debounce(this.$refs.scroll.refresh,200)
+      // const refresh = debounce(this.$refs.scroll.refresh,200)
 
-      this.$bus.$on('itemImgLoaded',() => {
-        refresh()
-      })
+      // this.$bus.$on('itemImgLoaded',() => {
+      //   refresh()
+      // })
+      console.log('wo jin lai home')
     },
     activated() {
       this.$refs.scroll.scrollTo(0,this.scrollY,0)
     },
     deactivated() {
+      // 记录页面当前坐标
       this.scrollY = this.$refs.scroll.getScrollY()
+    },
+    beforeDestroy() {
+      // 因为keep-alive缓存了，离开不会调用这个方法
+      this.$bus.$off('itemImgLoaded')
+      console.log('beforeDestroy off')
     }
   }
 </script>

@@ -1,11 +1,19 @@
 import request from './request'
 
+// 获取详情页面信息
 export function getDetailInfoes(iid) {
   return request({
     url: '/detail',
     params: {
       iid
     }
+  })
+}
+
+// 获取推荐信息
+export function getRecommend() {
+  return request({
+    url: '/recommend'
   })
 }
 
@@ -30,5 +38,12 @@ export class shopInfo {
     this.sells = shopInfo.cSells
     this.score = shopInfo.score
     this.goodsCount = shopInfo.cGoods
+  }
+}
+
+export class goodParams {
+  constructor(goodParams) {
+    this.sizeParams = goodParams.rule.tables[0]
+    this.factoryParams = goodParams.info.set
   }
 }

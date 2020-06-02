@@ -40,6 +40,11 @@
 
 <style scoped>
 /* @import url(); 引入css类 */
+  .detail-navbar {
+    z-index: 999;
+    position: relative;
+    background-color: #fff;
+  }
   .active {
     color: var(--color-high-text);
   }

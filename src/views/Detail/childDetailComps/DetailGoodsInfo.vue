@@ -31,12 +31,6 @@
           return {}
         }
       }
-    }, 
-    created() {
-      console.log('son C ------>' + this.goodsInfo)
-    },
-    mounted() {
-      console.log('son M 》》》》》》' + this.goodsInfo)
     }
   }
 </script>
