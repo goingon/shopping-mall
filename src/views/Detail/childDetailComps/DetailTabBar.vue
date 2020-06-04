@@ -16,7 +16,7 @@
       </div>
     </div>
     <div class="detail-tabbar-right right">
-      <div class="detail-tabbar-shoppingcar">加入购物车</div>
+      <div class="detail-tabbar-shoppingcar" @click="addCart">加入购物车</div>
       <div class="detail-tabbar-buying">购买</div>
     </div>
   </div>
@@ -30,19 +30,10 @@
         
       }
     },
-    components: {
-        
-    },
     methods: {
-      
-    },
-    //生命周期 - 创建完成（访问当前this实例）
-    created() {
-      
-    },
-    //生命周期 - 挂载完成（访问DOM元素）
-    mounted() {
-      
+      addCart() {
+        this.$emit('addProductCart')
+      }
     }
   }
 </script>

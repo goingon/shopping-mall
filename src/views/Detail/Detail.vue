@@ -15,7 +15,7 @@
       <InputEle v-model="vmodelData1" :myid="'1223'"/>
       <InputEle v-model="vmodelData2" :myid="'2242'"/> -->
     </scroll>
-    <DetailTabBar/>
+    <DetailTabBar @addProductCart="addProductCart"/>
     <BackTop @click.native='backTop'  ref="backtop" v-show="isBackTopShow"/>
   </div>
 </template>
@@ -23,7 +23,6 @@
 <script>
   import Scroll from 'components/common/scroll/Scroll'
   import GoodsList from 'components/content/showGoods/GoodsList'
-  import BackTop from 'components/content/backTop/BackTop'
 
   import DetailNavBar from './childDetailComps/DetailNavBar'
   import DetailSwiper from './childDetailComps/DetailSwiper'
@@ -38,11 +37,11 @@
 
   import { getDetailInfoes, goodsInfo, shopInfo, goodParams, getRecommend } from 'network/detail'
   import { debounce } from 'commonjs/util'
-  import { itemListenerMixin } from 'commonjs/mixin'
+  import { itemListenerMixin, backTopMixin } from 'commonjs/mixin'
 
   export default {
     name: "Detail",
-    mixins:[itemListenerMixin],
+    mixins:[itemListenerMixin, backTopMixin],
     data() {
       return {
         iid: '',
@@ -54,7 +53,6 @@
         commentInfo: [],
         recommendData: [],
         detailImageListener: null,
-        isBackTopShow: false,
         detailThemesTopY: [],
         getThemesTopY: null,
         detailIndex: 0,
@@ -73,7 +71,6 @@
       DetailCommentInfo,
       GoodsList,
       DetailTabBar,
-      BackTop,
       InputEle
     },
     methods: {
@@ -91,10 +88,6 @@
         }
       },
 
-      backTop() {
-        this.$refs.scroll.scrollTo(0,0)
-      },
-
       detailNavClick(index) {
         this.$refs.scroll.scrollTo(0, -this.detailThemesTopY[index], 100)
       },
@@ -102,6 +95,20 @@
       detailImgLoaded() {
         this.newRefresh()
         this.getThemesTopY()
+      },
+
+      // 加入购物车
+      addProductCart() {
+        const product= {
+          title: this.goodsInfo.title,
+          image: this.detailSwiperImages[0],
+          desc: this.goodsInfo.desc,
+          price: this.goodsInfo.realPrice,
+          iid: this.iid
+        }
+        console.log(product)
+        // this.$store.commit('addCart', product) //这里是调用store的mutations
+        this.$store.dispatch('addCart', product)  //这里是调用store的actions
       }
     },
     watch: {
@@ -172,13 +179,12 @@
     z-index: 99;
   }
   .content {
-    /* height: calc(100%-93px);
-    overflow: hidden;
-    margin-top: 45px; */
+    /* height: calc(100% - 44px - 49px);  */
     position: absolute;
     top: 44px;
     bottom: 49px;
     left: 0;
     right: 0;
+    overflow: hidden;
   }
 </style>

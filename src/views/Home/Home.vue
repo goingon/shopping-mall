@@ -122,7 +122,7 @@
       <li>aaa100</li>
     </ul> -->
     </scroll>
-    <back-top @click.native="backTop" ref="backtop" v-show="isBackTopshow"/>
+    <back-top @click.native="backTop" ref="backtop" v-show="isBackTopShow"/>
   </div>
 </template>
 
@@ -131,7 +131,6 @@
   import Scroll from 'components/common/scroll/Scroll'
   import TabControl from 'components/content/tabControl/TabControl'
   import GoodsList from 'components/content/showGoods/GoodsList'
-  import BackTop from 'components/content/backTop/BackTop'
 
   import HomeSwiper from './childcomps/HomeSwiper'
   import HomeRecommendView from './childcomps/HomeRecommendView'
@@ -139,11 +138,11 @@
 
   import { getHomeMultidata, getHomeGoodsLists } from 'network/home'
   import { debounce } from 'commonjs/util'
-  import { itemListenerMixin } from 'commonjs/mixin'
+  import { itemListenerMixin, backTopMixin } from 'commonjs/mixin'
 
   export default {
     name: 'Home',
-    mixins: [itemListenerMixin],
+    mixins: [itemListenerMixin, backTopMixin],
     data() {
       return {
         banners: [],
@@ -168,7 +167,6 @@
           {id: '2', image: require('assets/images/swipe/2.jpg')},
           {id: '3', image: require('assets/images/swipe/3.jpg')}
         ],
-        isBackTopshow: false,
         tabOffsetTop: 0,
         isTabControlShow: false,
         scrollY: 0
@@ -179,7 +177,6 @@
       Scroll,
       TabControl,
       GoodsList,
-      BackTop,
       HomeSwiper,
       HomeRecommendView,
       WeekFashion
@@ -214,11 +211,6 @@
         this.$refs.tabcontrolinner.currentIndex = index
       },
 
-      //返回顶部
-      backTop() {
-        this.$refs.scroll.scrollTo(0,0)
-      },
-
       //加载更多数据
       getMoreData() {
         this.getHomeGoodsLists(this.currentTab)
@@ -226,8 +218,8 @@
 
       //滚动事件，获取当前位置
       scrollEvent(position) {
-        this.isBackTopshow = position.y <= -500 ? true : false
-        this.isTabControlShow = (-position.y) >= this.tabOffsetTop
+        this.isBackTopShow = position.y <= -500 ? true : false
+        this.isTabControlShow = (-position.y) >= this.tabOffsetTop ? true : false
       },
 
       // 轮播图加载完成
@@ -276,7 +268,7 @@
       console.log('wo jin lai home')
     },
     activated() {
-      this.$refs.scroll.scrollTo(0,this.scrollY,100)
+      this.$refs.scroll.scrollTo(0,this.scrollY,0)
     },
     deactivated() {
       // 记录页面当前坐标
@@ -319,8 +311,9 @@
     margin-top: 45px; */
     position: absolute;
     top: 44px;
-    bottom: 47px;
+    bottom: 49px;
     left: 0;
     right: 0;
+    overflow: hidden;
   }
 </style>

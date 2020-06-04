@@ -1,18 +1,19 @@
-<!-- profile -->
+<!-- CartCheckButton -->
 <template>
-  <div></div>
+  <div class="cart-check-button">
+    <img src="~assets/images/cart/checked.svg" alt="">
+  </div>
 </template>
 
 <script>
   export default {
-    name: "profile",
+    name: "CartCheckButton",
     data() {
       return {
         
       }
     },
     components: {
-        
     },
     methods: {
       
@@ -30,5 +31,14 @@
 
 <style scoped>
 /* @import url(); 引入css类 */
-  
+  .cart-check-button {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    transform: translatey(-50%);
+  }
+  .cart-check-button img {
+    width: 20px;
+    height: 20px;
+  }
 </style>
