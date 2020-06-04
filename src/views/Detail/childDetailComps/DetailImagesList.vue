@@ -22,7 +22,7 @@
       imagesList: {
         type: Object,
         default() {
-          {}
+          return {}
         }
       }
     },
@@ -36,7 +36,7 @@
     },
     methods: {
       imgLoaded() {
-        this.$bus.$emit('detailImgLoaded')
+        this.$emit('detailImgLoaded')
       }
     },
     //生命周期 - 创建完成（访问当前this实例）

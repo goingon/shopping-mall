@@ -3,13 +3,14 @@ import { debounce } from 'commonjs/util'
 export const itemListenerMixin = {
   data() {
     return {
-      itemImageListener: null
+      itemImageListener: null,
+      newRefresh: null
     }
   },
   mounted() {
-    let newRefresh = debounce(this.$refs.scroll.refresh, 200)
+    this.newRefresh = debounce(this.$refs.scroll.refresh, 200)
     this.itemImageListener = () => {
-      newRefresh()
+      this.newRefresh()
     }
     this.$bus.$on('itemImgLoaded', this.itemImageListener)
     console.log('1： mixin itemImgLoaded on')
@@ -19,8 +20,8 @@ export const itemListenerMixin = {
     console.log('4： mixin beforeDestroy itemImgLoaded off')
   },
   activated() {
-    this.$bus.$on('itemImgLoaded', this.itemImageListener)
-    console.log('6： mixin activated itemImgLoaded on')
+    //this.$bus.$on('itemImgLoaded', this.itemImageListener)
+    //console.log('6： mixin activated itemImgLoaded on')
   },
   deactivated() {
     this.$bus.$off('itemImgLoaded', this.itemImageListener)

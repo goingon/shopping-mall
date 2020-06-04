@@ -2,6 +2,7 @@ import request from './request'
 
 // 获取详情页面信息
 export function getDetailInfoes(iid) {
+  console.log(iid)
   return request({
     url: '/detail',
     params: {

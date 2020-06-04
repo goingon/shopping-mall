@@ -55,7 +55,7 @@
         probeType: this.probeType,
         pullUpLoad: this.pullUpLoad
       })
-      this.scroll.scrollTo(0,0)
+      // this.scroll.scrollTo(0,0)
 
       // 2、监听滚动事件，获取滚动位置
       if(this.probeType == 2 || this.probeType == 3) {

@@ -276,11 +276,12 @@
       console.log('wo jin lai home')
     },
     activated() {
-      this.$refs.scroll.scrollTo(0,this.scrollY,0)
+      this.$refs.scroll.scrollTo(0,this.scrollY,100)
     },
     deactivated() {
       // 记录页面当前坐标
       this.scrollY = this.$refs.scroll.getScrollY()
+      console.log(this.scrollY)
     },
     beforeDestroy() {
       // 因为keep-alive缓存了，离开不会调用这个方法
