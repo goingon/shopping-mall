@@ -15,6 +15,8 @@ export default {
 
   //在store中新增一条商品数据product
   [ADD_TO_CART](state, product) {
+    product.count = 1
+    product.isChecked = true
     state.cartList.push(product)
   }
 }

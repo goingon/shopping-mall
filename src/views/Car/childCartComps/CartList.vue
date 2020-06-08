@@ -54,7 +54,7 @@
 <style scoped>
 /* @import url(); 引入css类 */
   .cart-list {
-    height: calc(100% - 44px - 49px);
+    height: calc(100% - 44px - 49px - 40px);
     padding: 0 5px;
   }
   .content {

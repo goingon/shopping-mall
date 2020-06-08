@@ -1,10 +1,11 @@
 <!-- Car -->
 <template>
   <div id="cart">
-    <NavBar class="navbar">
+    <NavBar class="cart-navbar">
       <div slot="centerbar">购物车({{cartLength}})</div>
     </NavBar>
     <CartList />
+    <CartTotalBar/>
   </div>
 </template>
 
@@ -12,6 +13,7 @@
   import NavBar from "components/common/navbar/NavBar"
 
   import CartList from "./childCartComps/CartList"
+  import CartTotalBar from './childCartComps/CartTotalBar'
 
   import { mapGetters } from 'vuex'
 
@@ -24,7 +26,8 @@
     },
     components: {
       NavBar,
-      CartList
+      CartList,
+      CartTotalBar
     },
     methods: {
       
@@ -33,7 +36,7 @@
       /* 另一种映射vuex的store的getters到计算属性使用,使用对象自定义名称
         ...mapGetters({
           length: 'cartLength',
-          list: 'cartList']
+          list: 'cartList'
           })
       */
       ...mapGetters(['cartLength'])
@@ -50,7 +53,7 @@
   #cart {
     height: 100vh;
   }
-  .navbar {
+  .cart-navbar {
     position: relative;
     background: var(--color-tint);
     color: #fff;

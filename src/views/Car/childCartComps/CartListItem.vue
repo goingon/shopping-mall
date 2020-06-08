@@ -2,7 +2,7 @@
 <template>
   <div class="cart-list-item">
     <div class="cart-list-item-check">
-      <CartCheckButton/>
+      <CartCheckButton :isChecked="product.isChecked" @click.native="toggleChecked"/>
     </div>
     <img :src="product.image" alt="">
     <div class="cart-list-item-text">
@@ -34,15 +34,9 @@
       CartCheckButton
     },
     methods: {
-      
-    },
-    //生命周期 - 创建完成（访问当前this实例）
-    created() {
-      
-    },
-    //生命周期 - 挂载完成（访问DOM元素）
-    mounted() {
-      
+      toggleChecked() {
+        this.product.isChecked = !this.product.isChecked
+      }
     }
   }
 </script>

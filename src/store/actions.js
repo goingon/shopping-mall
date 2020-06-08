@@ -19,13 +19,16 @@ export default {
   }*/
   // 把context解构赋值
   addCart({ state, commit }, payload) {
-    let oldProduct = state.cartList.find(item => item.iid === payload.iid)
-    if (oldProduct) {
-      commit(ADD_COUNTER, oldProduct)
-    } else {
-      payload.count = 1
-      payload.isChecked = true
-      commit(ADD_TO_CART, payload)
-    }
+    // 返回一条promise，处理成功后的事务
+    return new Promise((resolve, reject) => {
+      let oldProduct = state.cartList.find(item => item.iid === payload.iid)
+      if (oldProduct) {
+        commit(ADD_COUNTER, oldProduct)
+        resolve('已有商品数量 +1')
+      } else {
+        commit(ADD_TO_CART, payload)
+        resolve('添加一条商品信息')
+      }
+    })
   }
 }

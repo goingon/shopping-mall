@@ -38,6 +38,7 @@
   import { getDetailInfoes, goodsInfo, shopInfo, goodParams, getRecommend } from 'network/detail'
   import { debounce } from 'commonjs/util'
   import { itemListenerMixin, backTopMixin } from 'commonjs/mixin'
+  import { mapActions } from 'vuex'
 
   export default {
     name: "Detail",
@@ -74,6 +75,8 @@
       InputEle
     },
     methods: {
+      ...mapActions(['addCart']), //映射vuex的actions为方法
+
       scrollEvent(position) {
         this.isBackTopShow = (-position.y >= 600) ? true : false
 
@@ -106,9 +109,12 @@
           price: this.goodsInfo.realPrice,
           iid: this.iid
         }
-        console.log(product)
         // this.$store.commit('addCart', product) //这里是调用store的mutations
-        this.$store.dispatch('addCart', product)  //这里是调用store的actions
+        // this.$store.dispatch('addCart', product)  //这里是调用store的actions
+        //使用映射方法调用vuex中的actions,actions可以返回一个Promise方法，用来处理actions成功后的事务
+        this.addCart(product).then(res => {
+          console.log(res)
+        })
       }
     },
     watch: {
